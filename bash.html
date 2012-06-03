@@ -1,0 +1,84 @@
+<head>
+  <title>Nursery Rhyme Bash</title>
+</head>
+
+<body>  
+  <div id="container">
+
+	  <div id="gameboard" class="transparent">
+		  <h1>Nursery Rhyme Bash</h1>
+
+	    {{> gameboard}}
+	  </div>
+
+	  <div id="outer" class="transparent">
+
+		  <h2>Current Leaders</h2>
+	
+	      {{> leaderboard}}
+	  </div>
+
+  </div>
+
+</body>
+
+<template name="gameboard">
+  
+   <p>Your mission, should you chose to accept it, is to type in five phrases... as fast as you can.</p> 
+
+   <p>If you are ready to start, click on this <input id="thebutton" type="submit" value="button" class="thebutton"/></p> 
+
+  <div class="board">
+	 {{#if active_text}}
+		  <div class="text">	
+		    {{active_text}}
+		  </div>
+   	 {{/if}}
+  </div>
+
+
+  <div class="input">
+	 <p>Please input your entry:</p>
+	
+	 <p><textarea cols="80" rows="5" /></p>
+	
+	
+	
+	
+  </div>
+  {{#if active_text}}
+	  <p><input id="donebutton" type="submit" value="I'm done" class="donebutton"/> <span id="timer">0</span>&nbsp; ms</p> 
+   {{/if}}
+
+</template>
+
+
+<template name="leaderboard">
+  <div class="leaderboard">
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+  </div>
+
+  {{#if selected_name}}
+  <div class="details">
+    <div class="name">{{selected_name}}</div>
+    <input type="button" class="inc" value="Give 5 points" />
+  </div>
+  {{/if}}
+
+  {{#unless selected_name}}
+  <div class="none">Click a player to select</div>
+  {{/unless}}
+</template>
+
+<template name="player">
+  <div class="player {{selected}}">
+    <span class="name">{{name}}</span>
+    <span class="speed">{{speed}}</span>
+    <span class="score">{{score}}</span>
+  </div>
+</template>
+
+
+
